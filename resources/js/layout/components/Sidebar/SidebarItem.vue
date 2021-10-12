@@ -1,12 +1,12 @@
 <template>
   <div>
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
-        <el-menu-item :index="onlyOneChild.path" :class="{'submenu-title-noDropdown':!isNest}">
+        <el-menu-item :index="item.id.toString()" :class="{'submenu-title-noDropdown':!isNest}">
           <item :icon="onlyOneChild.icon || item.icon" :title="onlyOneChild.title" />
         </el-menu-item>
     </template>
 
-    <el-submenu v-else ref="subMenu" :index="item.id" popper-append-to-body>
+    <el-submenu v-else ref="subMenu" :index="item.id.toString()" popper-append-to-body>
       <template slot="title">
         <item :icon="item.icon" :title="item.title" />
       </template>
@@ -61,7 +61,7 @@ export default {
         } else {
           // Temp set(will be used if only has one showing child)
           this.onlyOneChild = item
-                    console.log(this.onlyOneChild);
+          
           return true
         }
       })

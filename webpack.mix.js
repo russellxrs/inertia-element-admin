@@ -1,5 +1,5 @@
-const mix = require('laravel-mix');
-const path = require('path');
+const mix = require("laravel-mix");
+const path = require("path");
 
 /*
  |--------------------------------------------------------------------------
@@ -12,16 +12,24 @@ const path = require('path');
  |
  */
 
-mix.js('resources/js/main.js', 'public/js')
+mix.js("resources/js/main.js", "public/js")
     .vue()
     .webpackConfig({
         resolve: {
             alias: {
-                '@': path.resolve('resources/js')
+                "@": path.resolve("resources/js")
             }
+        },
+        module: {
+            rules: [{
+                test: /\.svg$/,
+                include: [path.resolve('resources/js/icons')],
+                loader: 'svg-sprite-loader',
+                options:  {symbolId: 'icon-[name]' }
+                // use: [{ loader: 'svg-sprite-loader', options: { symbolId: 'icon-[name]' } }],
+            }]
         }
     });
-
 
 // .postCss('resources/css/app.css', 'public/css', [
 
